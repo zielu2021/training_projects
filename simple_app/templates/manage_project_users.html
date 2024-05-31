@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Users for {{ project.name }}{% endblock %}
+
+{% block content %}
+<h1>Manage Users for {{ project.name }}</h1>
+
+<h2>Assigned Users</h2>
+<ul>
+    {% for user in assigned_users %}
+        <li>
+            {{ user.email }}
+            <form method="POST" action="{{ url_for('admin.remove_user', project_id=project.id) }}" style="display:inline;">
+                <input type="hidden" name="user_id" value="{{ user.id }}">
+                <button type="submit">Remove</button>
+            </form>
+        </li>
+    {% endfor %}
+</ul>
+
+<h2>Assign New User</h2>
+<form method="POST" action="{{ url_for('admin.assign_user', project_id=project.id) }}">
+    <label for="user_id">User</label>
+    <select name="user_id">
+        {% for user in all_users %}
+            <option value="{{ user.id }}">{{ user.email }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Assign</button>
+</form>
+
+<a href="{{ url_for('admin.manage_projects') }}">Back to Projects</a>
+{% endblock %}

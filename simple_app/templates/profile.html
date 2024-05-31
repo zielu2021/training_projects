@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile</title>
+</head>
+<body>
+    <h1>User Profile</h1>
+    <form method="POST" action="{{ url_for('auth.profile') }}" enctype="multipart/form-data">
+        <label for="username">Username</label>
+        <input type="text" name="username" value="{{ user.username }}">
+        <label for="bio">Bio</label>
+        <textarea name="bio">{{ user.bio }}</textarea>
+        <label for="profile_picture">Profile Picture</label>
+        <input type="file" name="profile_picture">
+        <button type="submit">Update Profile</button>
+    </form>
+    <br>
+    {% if user.profile_picture %}
+    <img src="{{ url_for('static', filename=user.profile_picture) }}" alt="Profile Picture">
+{% else %}
+
+    <img src="{{ url_for('static', filename='default.jpg') }}" alt="No Profile Picture">
+{% endif %}
+
+    <br>
+    <form method="POST" action="{{ url_for('auth.delete_profile') }}">
+        <button type="submit">Delete Account</button>
+    </form>
+</body>
+</html>
