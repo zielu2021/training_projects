@@ -1,0 +1,2 @@
+# training_projects
+small_diffrent_kind_projects
