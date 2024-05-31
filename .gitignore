@@ -1,8 +1,2 @@
-# Ignore Python bytecodes
-__pycache__/
-
 # Ignore virtual environment
 venv/
-
-# Ignore the local SQLite database
-site.db
